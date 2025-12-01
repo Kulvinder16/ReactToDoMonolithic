@@ -34,5 +34,5 @@ steps:
     vstsFeedPublish: 'f3621e70-95ef-427d-a2ef-453ede07fab7'
     vstsFeedPackagePublish: 'todo-monolithic-build'
     versionOption: 'custom'
-    versionPublish: '1.1'
+    versionPublish: '1.1.0'
     packagePublishDescription: 'Build folder first time update'

@@ -25,9 +25,14 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(System.DefaultWorkingDirectory)/build.zip'
     replaceExistingArchive: true
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'az storage blob upload --account-name todoinfra002 --container-name infra002 --name build.zip --file C:\Users\HP\agent_infra\_work\3\s\build.zip'
 
-    
+- task: UniversalPackages@0
+  inputs:
+    command: 'publish'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)/build'
+    feedsToUsePublish: 'internal'
+    vstsFeedPublish: 'f3621e70-95ef-427d-a2ef-453ede07fab7'
+    vstsFeedPackagePublish: 'todo-monolithic-build'
+    versionOption: 'custom'
+    versionPublish: '1.1'
+    packagePublishDescription: 'Build folder first time update'

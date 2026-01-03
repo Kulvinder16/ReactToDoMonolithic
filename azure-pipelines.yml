@@ -1,42 +1,50 @@
 trigger: 
 - main
-- features/*
+- release/*
+- develop
 
 pool: Default
 
-steps: 
-- task: NodeTool@0
-  inputs:
-    versionSource: 'spec'
-    versionSpec: '16.x'
+stages:
+  - stage: Build
+    jobs:
+      - job: Npm_install
+        displayName: NPM Install
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSource: 'spec'
+            versionSpec: '16.x'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'npm install'
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'npm run build'
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/build'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(System.DefaultWorkingDirectory)/build.zip'
-    replaceExistingArchive: true
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: 'build/**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/build'
-- task: UniversalPackages@0
-  inputs:
-    command: 'publish'
-    publishDirectory: '$(Build.ArtifactStagingDirectory)/build'
-    feedsToUsePublish: 'internal'
-    vstsFeedPublish: 'f3621e70-95ef-427d-a2ef-453ede07fab7'
-    vstsFeedPackagePublish: 'todo-monolithic-build'
-    versionOption: 'custom'
-    versionPublish: '1.1.0'
-    packagePublishDescription: 'Build folder first time update'
+        - task: PowerShell@2
+          inputs:
+            targetType: 'inline'
+            script: 'npm install'
+        # - task: PowerShell@2
+        #   inputs:
+        #     targetType: 'inline'
+        #     script: 'npm run build'
+
+
+# - task: ArchiveFiles@2
+#   inputs:
+#     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/build'
+#     includeRootFolder: true
+#     archiveType: 'zip'
+#     archiveFile: '$(System.DefaultWorkingDirectory)/build.zip'
+#     replaceExistingArchive: true
+# - task: CopyFiles@2
+#   inputs:
+#     SourceFolder: '$(System.DefaultWorkingDirectory)'
+#     Contents: 'build/**'
+#     TargetFolder: '$(Build.ArtifactStagingDirectory)/build'
+# - task: UniversalPackages@0
+#   inputs:
+#     command: 'publish'
+#     publishDirectory: '$(Build.ArtifactStagingDirectory)/build'
+#     feedsToUsePublish: 'internal'
+#     vstsFeedPublish: 'f3621e70-95ef-427d-a2ef-453ede07fab7'
+#     vstsFeedPackagePublish: 'todo-monolithic-build'
+#     versionOption: 'custom'
+#     versionPublish: '1.1.0'
+#     packagePublishDescription: 'Build folder first time update'

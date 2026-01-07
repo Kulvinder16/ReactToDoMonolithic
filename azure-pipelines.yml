@@ -47,7 +47,7 @@ stages:
             command: 'publish'
             publishDirectory: '$(Build.ArtifactStagingDirectory)/build'
             feedsToUsePublish: 'internal'
-            vstsFeedPublish: 'f3621e70-95ef-427d-a2ef-453ede07fab7'
+            vstsFeedPublish: '22bd7fb0-482a-4deb-94b1-136829b17220'
             vstsFeedPackagePublish: 'todo-monolithic-build'
             versionOption: 'custom'
             versionPublish: '1.1.0'

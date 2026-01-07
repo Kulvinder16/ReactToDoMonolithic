@@ -25,18 +25,18 @@ stages:
             targetType: 'inline'
             script: 'npm run build'
 
-  # - stage: Artifact
-  #   jobs:
-  #     - job: Artifact
-  #       displayName: Artifact
-  #       steps:
-  #       - task: ArchiveFiles@2
-  #         inputs:
-  #           rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-  #           includeRootFolder: true
-  #           archiveType: 'zip'
-  #           archiveFile: '$(System.DefaultWorkingDirectory)/build.zip'
-  #           replaceExistingArchive: true
+  - stage: Artifact
+    jobs:
+      - job: Artifact
+        displayName: Artifact
+        steps:
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/build'
+            includeRootFolder: true
+            archiveType: 'zip'
+            archiveFile: '$(System.DefaultWorkingDirectory)/build.zip'
+            replaceExistingArchive: true
   #       - task: CopyFiles@2
   #         inputs:
   #           SourceFolder: '$(System.DefaultWorkingDirectory)'

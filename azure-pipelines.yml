@@ -6,24 +6,24 @@ trigger:
 pool: Default
 
 stages:
-  - stage: Build
-    jobs:
-      - job: Npm_install
-        displayName: NPM Install
-        steps:
-        - task: NodeTool@0
-          inputs:
-            versionSource: 'spec'
-            versionSpec: '16.x'
+  # - stage: Build
+  #   jobs:
+  #     - job: Npm_install
+  #       displayName: NPM Install
+  #       steps:
+  #       - task: NodeTool@0
+  #         inputs:
+  #           versionSource: 'spec'
+  #           versionSpec: '16.x'
 
-        - task: PowerShell@2
-          inputs:
-            targetType: 'inline'
-            script: 'npm install'
-        - task: PowerShell@2
-          inputs:
-            targetType: 'inline'
-            script: 'npm run build'
+  #       - task: PowerShell@2
+  #         inputs:
+  #           targetType: 'inline'
+  #           script: 'npm install'
+  #       - task: PowerShell@2
+  #         inputs:
+  #           targetType: 'inline'
+  #           script: 'npm run build'
 
   - stage: Artifact
     jobs:

@@ -6,49 +6,49 @@ trigger:
 pool: Default
 
 stages:
-  # - stage: Build
-  #   jobs:
-  #     - job: Npm_install
-  #       displayName: NPM Install
-  #       steps:
-  #       - task: NodeTool@0
-  #         inputs:
-  #           versionSource: 'spec'
-  #           versionSpec: '16.x'
-
-  #       - task: PowerShell@2
-  #         inputs:
-  #           targetType: 'inline'
-  #           script: 'npm install'
-  #       - task: PowerShell@2
-  #         inputs:
-  #           targetType: 'inline'
-  #           script: 'npm run build'
-
-  - stage: Artifact
+  - stage: Build
     jobs:
-      - job: Artifact
-        displayName: Artifact
+      - job: Npm_install
+        displayName: NPM Install
         steps:
-        - task: ArchiveFiles@2
+        - task: NodeTool@0
           inputs:
-            rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-            includeRootFolder: true
-            archiveType: 'zip'
-            archiveFile: '$(System.DefaultWorkingDirectory)/build.zip'
-            replaceExistingArchive: true
-        - task: CopyFiles@2
+            versionSource: 'spec'
+            versionSpec: '16.x'
+
+        - task: PowerShell@2
           inputs:
-            SourceFolder: '$(System.DefaultWorkingDirectory)'
-            Contents: 'build/**'
-            TargetFolder: '$(Build.ArtifactStagingDirectory)/build'
-        - task: UniversalPackages@0
+            targetType: 'inline'
+            script: 'npm install'
+        - task: PowerShell@2
           inputs:
-            command: 'publish'
-            publishDirectory: '$(Build.ArtifactStagingDirectory)/build'
-            feedsToUsePublish: 'internal'
-            vstsFeedPublish: '22bd7fb0-482a-4deb-94b1-136829b17220'
-            vstsFeedPackagePublish: 'todo-monolithic-build'
-            versionOption: 'custom'
-            versionPublish: '1.1.0'
-            packagePublishDescription: 'Build folder first time update'
+            targetType: 'inline'
+            script: 'npm run build'
+
+  # - stage: Artifact
+  #   jobs:
+  #     - job: Artifact
+  #       displayName: Artifact
+  #       steps:
+  #       - task: ArchiveFiles@2
+  #         inputs:
+  #           rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+  #           includeRootFolder: true
+  #           archiveType: 'zip'
+  #           archiveFile: '$(System.DefaultWorkingDirectory)/build.zip'
+  #           replaceExistingArchive: true
+  #       - task: CopyFiles@2
+  #         inputs:
+  #           SourceFolder: '$(System.DefaultWorkingDirectory)'
+  #           Contents: 'build/**'
+  #           TargetFolder: '$(Build.ArtifactStagingDirectory)/build'
+  #       - task: UniversalPackages@0
+  #         inputs:
+  #           command: 'publish'
+  #           publishDirectory: '$(Build.ArtifactStagingDirectory)/build'
+  #           feedsToUsePublish: 'internal'
+  #           vstsFeedPublish: '22bd7fb0-482a-4deb-94b1-136829b17220'
+  #           vstsFeedPackagePublish: 'todo-monolithic-build'
+  #           versionOption: 'custom'
+  #           versionPublish: '1.1.0'
+  #           packagePublishDescription: 'Build folder first time update'

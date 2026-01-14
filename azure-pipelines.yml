@@ -6,29 +6,45 @@ trigger:
 pool: Default
 
 stages:
-  - stage: Build
+  - stage: Lint
     jobs:
-      - job: Npm_install
-        displayName: NPM Install
+      - job: JSBiomeLint
+        displayName: JS Biome Lint
+        continueOnError: true
         steps:
-        - task: NodeTool@0
+        - task: PowerShell@2
           inputs:
-            versionSource: 'spec'
-            versionSpec: '16.x'
+            targetType: 'inline'
+            script: 'invoke-webrequest -uri "https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%402.3.11/biome-win32-x64.exe" -outfile "$(Agent.ToolsDirectory)/biome.exe"'
 
-        - task: PowerShell@2
-          inputs:
-            targetType: 'inline'
-            script: 'npm install'
-        - task: PowerShell@2
-          inputs:
-            targetType: 'inline'
-            script: 'npm run build'
-        - task: PublishPipelineArtifact@1
-          inputs:
-            targetPath: '$(System.DefaultWorkingDirectory)/build/'
-            artifact: 'build_artifacts'
-            publishLocation: 'pipeline'
+
+
+
+
+
+  # - stage: Build
+  #   jobs:
+  #     - job: Npm_install
+  #       displayName: NPM Install
+  #       steps:
+  #       - task: NodeTool@0
+  #         inputs:
+  #           versionSource: 'spec'
+  #           versionSpec: '16.x'
+
+  #       - task: PowerShell@2
+  #         inputs:
+  #           targetType: 'inline'
+  #           script: 'npm install'
+  #       - task: PowerShell@2
+  #         inputs:
+  #           targetType: 'inline'
+  #           script: 'npm run build'
+  #       - task: PublishPipelineArtifact@1
+  #         inputs:
+  #           targetPath: '$(System.DefaultWorkingDirectory)/build/'
+  #           artifact: 'build_artifacts'
+  #           publishLocation: 'pipeline'
 
   # - stage: Artifact
   #   jobs:

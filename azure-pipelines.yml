@@ -17,8 +17,7 @@ stages:
             targetType: 'inline'
             script: |
               invoke-webrequest -uri "https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%402.3.11/biome-win32-x64.exe" -outfile "$(Agent.ToolsDirectory)/biome.exe"
-              
-              $(Agent.ToolsDirectory)/biome.exe lint $(System.DefaultWorkingDirctory)/src
+              $(Agent.ToolsDirectory)/biome.exe lint $(System.DefaultWorkingDirectory)/src/
 
 
 

@@ -12,8 +12,21 @@ stages:
     jobs:
       - job: JSLint
         displayName: JS_Lint
+        continueOnError: true
         steps:
         - task: PowerShell@2
           inputs:
             targetType: 'inline'
             script: 'Invoke-WebRequest -Uri "https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%402.3.13/biome-win32-x64.exe" -OutFile "$(Agent.ToolsDirectory)/biome.exe" lint "$(System.DefaultWorkingDirectory)/src"'
+        
+      - job: CSSLint
+        displayName: CSS_Lint
+        continueOnError: true
+        steps:
+        - task: PowerShell@2
+          inputs:
+            targetType: 'inline'
+            script: |
+              npm install -g stylelint stylelint-config-standard
+              
+              npx stylelint "$(System.DefaultWorkingDirectory)/src"

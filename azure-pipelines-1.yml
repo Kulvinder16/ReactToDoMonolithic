@@ -16,4 +16,4 @@ stages:
         - task: PowerShell@2
           inputs:
             targetType: 'inline'
-            script: 'Invoke-WebRequest -Uri "https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%402.3.13/biome-win32-x64.exe" -OutFile "$(Agent.ToolsDirectory)/biome.exe"'
+            script: 'Invoke-WebRequest -Uri "https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%402.3.13/biome-win32-x64.exe" -OutFile "$(Agent.ToolsDirectory)/biome.exe" lint "$(System.DefaultWorkingDirectory)/src"'

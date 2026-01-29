@@ -23,6 +23,11 @@ stages:
         displayName: CSS_Lint
         continueOnError: true
         steps:
+        - task: NodeTool@0
+          inputs:
+            versionSource: 'spec'
+            versionSpec: 
+            checkLatest: true
         - task: PowerShell@2
           continueOnError: true
           inputs:

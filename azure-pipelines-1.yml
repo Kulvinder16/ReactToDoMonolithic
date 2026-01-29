@@ -50,6 +50,6 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              C:\Users\HP\AppData\Local\Programs\Python\Python314\Scripts\pip.exe install --user yamllint
+              python -m pip install --user yamllint
               
-              yamllint "$(System.DefaultWorkingDirectory)"
+              python -m yamllint "$(System.DefaultWorkingDirectory)"

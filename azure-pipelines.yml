@@ -21,6 +21,12 @@ stages:
               
               Write-Host "Running Biome scan..."
               & "$(Agent.ToolsDirectory)\biome.exe" check "$(System.DefaultWorkingDirectory)\src" --error-on-warnings
+        - task: PowerShell@2
+          inputs:
+            targetType: 'inline'
+            script: |
+              node -v
+              npm -v
 
 
 

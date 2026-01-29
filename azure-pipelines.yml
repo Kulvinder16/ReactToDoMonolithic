@@ -13,6 +13,7 @@ stages:
         continueOnError: true
         steps:
         - task: PowerShell@2
+          continueOnError: true
           inputs:
             targetType: 'inline'
             script: |

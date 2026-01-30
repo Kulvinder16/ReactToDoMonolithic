@@ -50,14 +50,5 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              $python = "C:\Users\HP\AppData\Local\Programs\Python\Python314\python.exe"
-              
-                      # sanity check
-                      & $python --version
-              
-                      # install yamllint
-                      & $python -m pip install --upgrade pip
-                      & $python -m pip install --user yamllint
-              
-                      # run yamllint
-                      & $python -m yamllint "$(System.DefaultWorkingDirectory)"
+              python -m pip install --upgrade pip
+                    pip install yamllint

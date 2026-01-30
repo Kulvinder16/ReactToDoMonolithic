@@ -50,6 +50,7 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              python --version
-              python -m pip install --user yamllint
-              python -m yamllint .
+              $python = "C:\Users\HP\AppData\Local\Programs\Python\Python314\python.exe"
+                      & $python --version
+                      & $python -m pip install --user yamllint
+                      & $python -m yamllint .

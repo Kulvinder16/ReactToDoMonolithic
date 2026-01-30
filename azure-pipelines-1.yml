@@ -50,5 +50,6 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              pip install --user yamllint
-              yamllint .
+              python --version
+              python -m pip install --user yamllint
+              python -m yamllint .

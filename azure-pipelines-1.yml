@@ -48,7 +48,7 @@ stages:
         steps:
         - task: UsePythonVersion@0
           inputs:
-            versionSpec: '3.14'
+            versionSpec: '3.14.2'
             addToPath: true
             architecture: 'x64'
         - task: PowerShell@2
